@@ -1,9 +1,10 @@
 
+from __future__ import absolute_import
 from PyQt4.QtGui import QFont
 from PyQt4 import QtGui
 
 def app_font():        
-    font = QFont("Mukti Narrow", 22)
+    font = QFont(u"Mukti Narrow", 22)
     font.setStyleHint(QFont.Monospace)
     return font
 

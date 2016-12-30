@@ -1,4 +1,5 @@
-
+from __future__ import division
+from __future__ import absolute_import
 import math
 
 from PyQt4 import QtGui, QtCore
@@ -6,7 +7,7 @@ from PyQt4.QtGui import QPen, QBrush, QConicalGradient, QColor, QFont
 from PyQt4.QtCore import QPropertyAnimation, QEasingCurve
 from .aux import app_font
 
-"""
+u"""
 QColor getColor(qreal key) const
 {
         // key must belong to [0,1]
@@ -32,6 +33,7 @@ QColor getColor(qreal key) const
 }
 """
 
+
 class GradientEmulator(object):
     def __init__(self):
         self.anim = QPropertyAnimation()
@@ -45,14 +47,15 @@ class GradientEmulator(object):
         self.anim.setCurrentTime(x * 100)
         return self.anim.currentValue()
 
+
 class RoundIndicator(QtGui.QWidget):
-    _line_width = 15 
+    _line_width = 15
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(RoundIndicator, self).__init__(*args, **kwargs)
         self.gradient = GradientEmulator()
-        self.gradient.setColorAt(0, QColor(255, 0, 0)) 
-        self.gradient.setColorAt(0.3, QColor(255, 0, 0)) 
+        self.gradient.setColorAt(0, QColor(255, 0, 0))
+        self.gradient.setColorAt(0.3, QColor(255, 0, 0))
         self.gradient.setColorAt(0.5, QColor(255, 255, 0))
         self.gradient.setColorAt(0.65, QColor(255, 255, 0))
         self.gradient.setColorAt(0.75, QColor(98, 178, 213))
@@ -72,50 +75,56 @@ class RoundIndicator(QtGui.QWidget):
         self.update()
 
     def paintEvent(self, event):
-        #pt = QtGui.QPainter(self.viewport())
+        # pt = QtGui.QPainter(self.viewport())
         pt = QtGui.QPainter(self)
-        #pt.begin(self)
+        # pt.begin(self)
         pt.setRenderHint(QtGui.QPainter.Antialiasing, True)
 
         drawRect = self.rect()
-        """Otherwise the line will be cut by rect borders"""
+        u"""Otherwise the line will be cut by rect borders"""
         drawRect.adjust(self._line_width / 2, self._line_width / 2, -self._line_width / 2, -self._line_width / 2)
 
-        """INNER CIRCLE"""
+        u"""INNER CIRCLE"""
 
         pt.setPen(QPen(QtCore.Qt.white))
         pt.setBrush(QBrush(QtCore.Qt.white))
         pt.drawEllipse(drawRect)
 
-        """LINE"""
-
-        main_color = self.gradient.getAt((100 - self._value) / 100)
-        conical = QConicalGradient(self.rect().center().x(), self.rect().center().y(), 90) 
-        conical.setColorAt(0.999, main_color)
+        u"""LINE"""
+        #############
+        print 'self._value'
+        print self._value
+        #############
+        # main_color = self.gradient.getAt((100 - self._value) / 100)
+        main_color = QColor(self.gradient.getAt((100 - self._value) / 100))
+        #############
+        print 'main_color'
+        print main_color
+        #############
+        conical = QConicalGradient(self.rect().center().x(), self.rect().center().y(), 90)
+        conical.setColorAt(0.999, main_color) # main color
         main_color = main_color.darker(120)
-        print(self._value / 100)
+        print self._value / 100
         conical.setColorAt((100 - self._value) / 100, main_color)
-        #conical.setColorAt(1, QtCore.Qt.green)
+        # conical.setColorAt(1, QtCore.Qt.green)
 
         pen = QPen(QBrush(conical), self._line_width)
         pen.setCapStyle(QtCore.Qt.RoundCap)
         pt.setPen(pen)
 
-        """Calculating the angle to offset line start/end. otherwise gradient start falls inside line's beginning cap"""
+        u"""Calculating the angle to offset line start/end. otherwise gradient start falls inside line's beginning cap"""
         radius = drawRect.width() / 2
         capAngle = math.degrees(math.acos(1 - self._line_width ** 2 / (2 * radius ** 2)))
 
         start = (90 - capAngle / 2) * 16
-        """offsetted backwards"""
+        u"""offsetted backwards"""
         end = - (360 - capAngle * 1.1) / 100 * self._value * 16
         pt.drawArc(drawRect, start, end if end else 1)
 
-        """NUMBER"""
+        u"""NUMBER"""
 
         pt.setPen(QPen(main_color))
         pt.setFont(app_font())
-        pt.drawText(self.rect(), QtCore.Qt.AlignCenter, str(self._value))
+        pt.drawText(self.rect(), QtCore.Qt.AlignCenter, unicode(self._value))
 
-        super().paintEvent(event)
-
-
+        super(RoundIndicator, self).paintEvent(event)

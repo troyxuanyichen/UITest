@@ -1,12 +1,13 @@
 
+from __future__ import absolute_import
 from PyQt4 import QtGui
 from PyQt4.QtGui import QPushButton, QIcon 
 
 class CloseButton(QPushButton):
     def __init__(self, window):
-        super().__init__(parent=window)
-        self.icon = QIcon("focus1desktop/ui/fi-power.png")
-        self.icon_pressed = QIcon("focus1desktop/ui/fi-pressed.png")
+        super(CloseButton, self).__init__(parent=window)
+        self.icon = QIcon(u"focus1desktop/ui/fi-power.png")
+        self.icon_pressed = QIcon(u"focus1desktop/ui/fi-pressed.png")
         self.setIcon(self.icon)
         self.setFlat(True)
         self.window = window

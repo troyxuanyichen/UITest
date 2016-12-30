@@ -1,2 +1,2 @@
 from .DataProcessor import DataProcessor
-from .CasualButter import CasualButter
+from .CausalButter import CausalButter

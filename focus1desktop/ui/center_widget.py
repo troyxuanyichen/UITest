@@ -1,4 +1,6 @@
 
+from __future__ import division
+from __future__ import absolute_import
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import QPen, QBrush, QColor, QFont, QWidget, QLabel
 
@@ -7,13 +9,15 @@ from .aux import app_font, fore_color
 
 
 class CenterWidget(QWidget):
-    def __init__(self, parent, *, round_ind_size, outer_color):
-       super().__init__(parent)
+    def __init__(self, parent, **_3to2kwargs):
+       outer_color = _3to2kwargs['outer_color']; del _3to2kwargs['outer_color']
+       round_ind_size = _3to2kwargs['round_ind_size']; del _3to2kwargs['round_ind_size']
+       super(CenterWidget, self).__init__(parent)
        self.outer_color = outer_color
        self.round_ind_size = round_ind_size
        self.round_ind = RoundIndicator(self)
        self.round_ind.resize(round_ind_size, round_ind_size)
-       self.statusLbl = QLabel("Disconnected",  self)
+       self.statusLbl = QLabel(u"Disconnected",  self)
        font = app_font()
        font.setPointSize(16)
        self.statusLbl.setFont(font)

@@ -27,7 +27,7 @@ class PackageReceiver:
 
     def sendDataToWifi(self):
         self.sendData = True
-        
+
 
     def stopConnecting(self):
         return
@@ -38,7 +38,7 @@ class PackageReceiver:
         # print len(aaa)
         while True:
             byteList = list(bytearray(self.sock.recv(1)))
-            self.tcpfile.writelines('%x  ' % byteList[0]) 
+            self.tcpfile.writelines('%x  ' % byteList[0])
             if len(byteList) == 0:
                 continue
             oneByte = byteList[0]
@@ -115,7 +115,7 @@ class PackageReceiver:
         rst = {}
         while not len(subpackages) == 0:
             key = str(bytearray(subpackages[:2]))
-            subSize = subpackages[2] * 256 + subpackages[3] 
+            subSize = subpackages[2] * 256 + subpackages[3]
             del subpackages[:4]
             subpackage = subpackages[:subSize]
             del subpackages[:subSize]
@@ -138,7 +138,7 @@ class PackageReceiver:
                 # print len(value)
                 for i in range(0, len(value), 3):
                     rst['EG'].append(self.int24To32(value[i:i + 3]))
-            
+
 
     		# elif key == ''
     	return rst

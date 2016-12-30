@@ -5,3 +5,5 @@ env/
 build/
 clean.sh
 DataProcessor.bak/
+*.bak
+*.txt
