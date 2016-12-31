@@ -64,7 +64,7 @@ class PackageReceiver:
                         # print finalDict['EG']
                         print 'Connected to device.'
                         self.dataProcessor.processRawDataWithFFT(finalDict['EG'])
-                        print finalDict['EG']
+                        # print finalDict['EG'] # todo
                         # self.dataProcessor.realTimePlotting()
                     ### TODO deal with subpackage dict ###
 
@@ -131,7 +131,7 @@ class PackageReceiver:
             if key == 'AS':
                 rst['AS'] = value
                 self.dataProcessor.changeParameter((value[0] << 8) + value[1], value[2])
-                print value
+                # print value # todo
         for key, value in inputDict.items(): # I don't know why
             if key == 'EG':
                 rst['EG'] = []

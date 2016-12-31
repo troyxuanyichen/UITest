@@ -81,13 +81,11 @@ class MainWindow(QtGui.QWidget):
 class ClientArea(QtGui.QWidget):
     def __init__(self, *args, **kwargs):
         super(ClientArea, self).__init__(*args, **kwargs)
+        self.need_init = True
         # self.pr = PackageReceiver('10.1.10.126',
         #                           8899)  # use this if headband is in STA mode for heanband device with pre-filter, sta, real
-        self.pr = PackageReceiver('10.10.100.254',
-                                  8899)  # use this if headband is in STA mode for heanband device with pre-filter, sta, real
-        self.pr.sendDataToWifi()
-        self.dataProcessor = self.pr.dataProcessor
-        thread.start_new_thread(self.pr.startConnecting, ())
+        # self.pr = PackageReceiver('10.10.100.254',
+        #                           8899)  # use this if headband is in STA mode for heanband device with pre-filter, sta, real
 
     def resizeEvent(self, event):
         _ROUND_IND = 150
@@ -149,10 +147,19 @@ class ClientArea(QtGui.QWidget):
         self.a = []
 
     def update(self):
+        if (self.need_init):
+            print 'initialize'
+            print '######################'
+            self.pr = PackageReceiver('10.10.100.241', 8899)  # use this if headband is in AP mode
+            self.pr.sendDataToWifi()
+            self.dataProcessor = self.pr.dataProcessor
+            self.need_init = False
+            # self.pr.startConnecting
+            thread.start_new_thread(self.pr.startConnecting, ())
         self.round_ind.text = self.dataProcessor.message
 
-        self.graphFlow.setData(self.dataProcessor.rawdata_array_whole)
-        self.graphAttention.setData(self.dataProcessor.scalEngIndBuff)
+        self.graphFlow.setData(self.dataProcessor.engIndBuff)
+        self.graphAttention.setData(self.dataProcessor.rawdata_array_whole)
         self.graphFrequency.setData(self.dataProcessor.rawfft_x[:100], self.dataProcessor.rawfft_y[:100])
         self.graphHistogram.setData(self.dataProcessor.histox, self.dataProcessor.histoy)
         if len(self.dataProcessor.scalEngIndBuff) != 0:

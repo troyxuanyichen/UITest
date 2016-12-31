@@ -227,7 +227,6 @@ class DataProcessor:
             event_normtrace = event_curnorm + event_normtrace
             if event_normtrace is not []:
                 event_corr = [np.correlate(i,pattern)[0] for i in event_normtrace]
-                print 'salt'
                 print "event_corr is : "+str(event_corr)
                 blink_count = [i for i, x in enumerate(event_corr) if x > 0.8]
             else:
@@ -271,10 +270,7 @@ class DataProcessor:
             the_rawdata_array = signal.filtfilt(b,a,the_rawdata_array)
             b, a = signal.butter(4, [3/(0.5*SampleRate), 35/(0.5 * SampleRate)], 'band')
             the_rawdata_array = signal.filtfilt(b,a,the_rawdata_array)
-            print '#########'
-            print 'the_rawdata_array'
-            print self.rawdata_array
-            print '##########'
+
             ################################
             # wear detection
             # eye link pattern collect
@@ -478,7 +474,7 @@ class DataProcessor:
             self.timerCount += 1
             if self.timerCount == 4:
                 self.timerCount = 0
-                print scalEngInd #scaled attention level
+                # print scalEngInd #scaled attention level todo
                 if scalEngInd >= 0 and scalEngInd < 30:
                     lightColor = 'blue'
                 elif scalEngInd >= 30 and scalEngInd < 70:

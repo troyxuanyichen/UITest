@@ -10,14 +10,14 @@ from .aux import app_font, fore_color, fore_bright_color, back_light_color, back
 
 CURVE_WIDTH = 2  # This is in pixels for all graphs not including Attention
 ATTENTION_CURVE_WIDTH = 0.8  # This is in graph coordinates!
-GRAPH_FLOW_MAX_Y_MODULE = 2
-GRAPH_FREQUENCY_MAX_Y = 800
-GRAPH_HISTOGRAM_MAX_Y = 100
-GRAPH_ATTENTION_MAX_Y = 100
+GRAPH_FLOW_MAX_Y_MODULE = 100
+GRAPH_FREQUENCY_MAX_Y = 5000
+GRAPH_HISTOGRAM_MAX_Y = 10000
+GRAPH_ATTENTION_MAX_Y = 200
 GRAPH_FLOW_MAX_X = 500
 GRAPH_FREQUENCY_MAX_X = 34
 GRAPH_HISTOGRAM_MAX_X = 20
-GRAPH_ATTENTION_MAX_X = 200
+GRAPH_ATTENTION_MAX_X = 5
 
 
 # If you want a graph to automatically fit the range by data, remove the corresponding setXRange() call
