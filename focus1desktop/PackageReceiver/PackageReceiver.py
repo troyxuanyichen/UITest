@@ -2,8 +2,9 @@ import socket
 from focus1desktop.DataProcessor import DataProcessor
 import sys
 
+
 class PackageReceiver:
-    def __init__ (self, ip, port):
+    def __init__(self, ip, port):
         self.ip = ip
         self.port = port
         self.sock = None
@@ -14,7 +15,6 @@ class PackageReceiver:
         self.dataProcessor = DataProcessor()
         self.tcpfile = open('tcp_rawdata.txt', 'w')
         # self.dataProcessor.setSocket(self.sock)
-
 
     def startConnecting(self):
         address = (self.ip, self.port)
@@ -27,7 +27,6 @@ class PackageReceiver:
 
     def sendDataToWifi(self):
         self.sendData = True
-
 
     def stopConnecting(self):
         return
@@ -66,16 +65,18 @@ class PackageReceiver:
                         self.dataProcessor.processRawDataWithFFT(finalDict['EG'])
                         # print finalDict['EG'] # todo
                         # self.dataProcessor.realTimePlotting()
-                    ### TODO deal with subpackage dict ###
+                        ### TODO deal with subpackage dict ###
 
     def fourBytesParse(self):
         if self.fourBytesBuff == None or len(self.fourBytesBuff) < 4:
             return 0
 
-        if self.fourBytesBuff[0] == ord('B') and self.fourBytesBuff[1] == ord('r') and self.fourBytesBuff[2] == ord('n') and self.fourBytesBuff[3] == ord('C'):
+        if self.fourBytesBuff[0] == ord('B') and self.fourBytesBuff[1] == ord('r') and self.fourBytesBuff[2] == ord(
+                'n') and self.fourBytesBuff[3] == ord('C'):
             return 1
 
-        if self.fourBytesBuff[0] == ord('P') and self.fourBytesBuff[1] == ord('K') and self.fourBytesBuff[2] == ord('E') and self.fourBytesBuff[3] == ord('D'):
+        if self.fourBytesBuff[0] == ord('P') and self.fourBytesBuff[1] == ord('K') and self.fourBytesBuff[2] == ord(
+                'E') and self.fourBytesBuff[3] == ord('D'):
             return -1
 
     def parsePackageBody(self):
@@ -88,7 +89,8 @@ class PackageReceiver:
         for i in range(0, 4):
             byteCheck[i] = self.packageBody[i] ^ self.packageBody[i + 4]
 
-        if not (byteCheck[0] == ord('B') and byteCheck[1] == ord('r') and byteCheck[2] == ord('n') and byteCheck[3] == ord('C')):
+        if not (byteCheck[0] == ord('B') and byteCheck[1] == ord('r') and byteCheck[2] == ord('n') and byteCheck[
+            3] == ord('C')):
             self.packageBody = []
             return None
         subpackages = self.packageBody[8:]
@@ -126,13 +128,13 @@ class PackageReceiver:
         return rst
 
     def getFinalDict(self, inputDict):
-    	rst = {}
-    	for key, value in inputDict.items():
+        rst = {}
+        for key, value in inputDict.items():
             if key == 'AS':
                 rst['AS'] = value
                 self.dataProcessor.changeParameter((value[0] << 8) + value[1], value[2])
                 # print value # todo
-        for key, value in inputDict.items(): # I don't know why
+        for key, value in inputDict.items():
             if key == 'EG':
                 rst['EG'] = []
                 # print len(value)
@@ -140,10 +142,5 @@ class PackageReceiver:
                     rst['EG'].append(self.int24To32(value[i:i + 3]))
 
 
-    		# elif key == ''
-    	return rst
-
-
-
-
-
+                # elif key == ''
+        return rst

@@ -13,9 +13,11 @@ def label(text, px_size):
    lbl.setPalette(palette)
    return lbl
 
-
 def logo_file():
     return u"focus1desktop/ui/brain.png"
+
+def video_file():
+    return u"focus1desktop/ui/ces_demo_video.mp4"
 
 def app_font():        
     #font = QFont("Mukti Narrow", 22)

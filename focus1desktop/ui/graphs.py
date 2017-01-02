@@ -84,8 +84,8 @@ class GraphBase(pyqtgraph.PlotWidget):
 class GraphFlow(GraphBase): # second
     def __init__(self, parent):
         super(GraphFlow, self).__init__(parent, title=u"Flow Data")
-        self.plotItem.getViewBox().setYRange(-GRAPH_FLOW_MAX_Y_MODULE, GRAPH_FLOW_MAX_Y_MODULE)
-        self.plotItem.getViewBox().setXRange(0, GRAPH_FLOW_MAX_X)
+        # self.plotItem.getViewBox().setYRange(-GRAPH_FLOW_MAX_Y_MODULE, GRAPH_FLOW_MAX_Y_MODULE)
+        # self.plotItem.getViewBox().setXRange(0, GRAPH_FLOW_MAX_X)
 
     def modify_axis_x(self, axis):
         axis.setTickSpacing(GRAPH_FLOW_MAX_X, GRAPH_FLOW_MAX_X)
@@ -98,8 +98,8 @@ class GraphAttention(GraphBase): # first
     def __init__(self, parent):
         super(GraphAttention, self).__init__(parent, title=u"Attention")
         view_box = self.plotItem.getViewBox()
-        view_box.setYRange(0, GRAPH_ATTENTION_MAX_Y)
-        view_box.setXRange(0, GRAPH_ATTENTION_MAX_X)
+        # view_box.setYRange(0, GRAPH_ATTENTION_MAX_Y)
+        # view_box.setXRange(0, GRAPH_ATTENTION_MAX_X)
 
         self.curve_logic_width = ATTENTION_CURVE_WIDTH
 
@@ -113,8 +113,8 @@ class GraphAttention(GraphBase): # first
 class GraphFrequency(GraphBase): # third
     def __init__(self, parent):
         super(GraphFrequency, self).__init__(parent, title=u"Frequency Spectrum")
-        self.plotItem.getViewBox().setYRange(0, GRAPH_FREQUENCY_MAX_Y)
-        self.plotItem.getViewBox().setXRange(0, GRAPH_FREQUENCY_MAX_X)
+        # self.plotItem.getViewBox().setYRange(0, GRAPH_FREQUENCY_MAX_Y)
+        # self.plotItem.getViewBox().setXRange(0, GRAPH_FREQUENCY_MAX_X)
 
     def modify_axis_x(self, axis):
         axis.setTickSpacing(GRAPH_FREQUENCY_MAX_X, GRAPH_FREQUENCY_MAX_X)
@@ -128,8 +128,8 @@ class GraphFrequency(GraphBase): # third
 class GraphHistogram(GraphBase): # forth
     def __init__(self, parent):
         super(GraphHistogram, self).__init__(parent, title=u"Histogram")
-        self.plotItem.getViewBox().setYRange(0, GRAPH_HISTOGRAM_MAX_Y)
-        self.plotItem.getViewBox().setXRange(0, GRAPH_HISTOGRAM_MAX_X)
+        # self.plotItem.getViewBox().setYRange(0, GRAPH_HISTOGRAM_MAX_Y)
+        # self.plotItem.getViewBox().setXRange(0, GRAPH_HISTOGRAM_MAX_X)
 
     def modify_axis_x(self, axis):
         axis.setTickSpacing(GRAPH_HISTOGRAM_MAX_X, GRAPH_HISTOGRAM_MAX_X)
