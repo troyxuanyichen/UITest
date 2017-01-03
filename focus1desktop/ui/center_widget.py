@@ -1,10 +1,10 @@
 from __future__ import absolute_import
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import QColor, QFont, QWidget, QLabel, QVBoxLayout, QPixmap, QSizePolicy, QHBoxLayout
-
+import phonon as phonon
 from .round_indicator import RoundIndicator
-from .aux import app_font, fore_color
-
+from .aux import app_font, fore_color, video_file
+from . import aux
 
 class PixmapLabel(QLabel):
     def __init__(self, parent, pixmap):
@@ -42,8 +42,13 @@ class CenterWidget(QWidget):
         # player.load(phonon.MediaSource(aux.video_file()))
         # player.play()
         # videofrom.show()
-        pic = QPixmap(u"focus1desktop/ui/ces_demo_video.mp4")
+        pic = QPixmap(u"focus1desktop/ui/device.png")
         device_img = PixmapLabel(self, pic)
+        # VideoPlayer = phonon.VideoPlayer()
+        # media = phonon.Mediasource(aux.video_file())
+        # VideoPlayer.load(media)
+        # VideoPlayer.play()
+        # VideoPlayer.show()
 
         v_layout = QVBoxLayout()
         v_layout.setSpacing(0)
