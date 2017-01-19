@@ -10,7 +10,7 @@ from .center_widget import CenterWidget
 from . import aux
 from .close_button import CloseButton
 import thread
-import phonon
+# import phonon
 
 
 _WIDTH = 1350
