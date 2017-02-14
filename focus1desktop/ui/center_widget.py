@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import QColor, QFont, QWidget, QLabel, QVBoxLayout, QPixmap, QSizePolicy, QHBoxLayout
-import phonon as phonon
 from .round_indicator import RoundIndicator
 from .aux import app_font, fore_color, video_file
 from . import aux

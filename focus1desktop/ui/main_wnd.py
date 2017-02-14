@@ -152,7 +152,7 @@ class ClientArea(QtGui.QWidget):
         if (self.need_init):
             print 'initialize'
             print '######################'
-            self.pr = PackageReceiver('10.1.10.241', 8899)  # use this if headband is in AP mode
+            self.pr = PackageReceiver('10.1.10.84', 8899)  # use this if headband is in AP mode
             self.pr.sendDataToWifi()
             self.dataProcessor = self.pr.dataProcessor
             self.need_init = False

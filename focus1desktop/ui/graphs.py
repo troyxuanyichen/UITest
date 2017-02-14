@@ -17,7 +17,7 @@ GRAPH_ATTENTION_MAX_Y = 200
 GRAPH_FLOW_MAX_X = 500
 GRAPH_FREQUENCY_MAX_X = 34
 GRAPH_HISTOGRAM_MAX_X = 20
-GRAPH_ATTENTION_MAX_X = 5
+GRAPH_ATTENTION_MAX_X = 200
 
 
 # If you want a graph to automatically fit the range by data, remove the corresponding setXRange() call
@@ -98,8 +98,8 @@ class GraphAttention(GraphBase): # first
     def __init__(self, parent):
         super(GraphAttention, self).__init__(parent, title=u"Attention")
         view_box = self.plotItem.getViewBox()
-        # view_box.setYRange(0, GRAPH_ATTENTION_MAX_Y)
-        # view_box.setXRange(0, GRAPH_ATTENTION_MAX_X)
+        #view_box.setYRange(0, GRAPH_ATTENTION_MAX_Y)
+        view_box.setXRange(0, GRAPH_ATTENTION_MAX_X)
 
         self.curve_logic_width = ATTENTION_CURVE_WIDTH
 
